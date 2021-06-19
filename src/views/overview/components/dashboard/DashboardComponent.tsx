@@ -1,13 +1,10 @@
 
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const DashboardContainer: React.FunctionComponent<{}> = () => (
+export const DashboardComponent: React.FunctionComponent<{}> = () => (
     <div>
-        <div>
-            <div>Icon</div>
-            <input type="text" placeholder="Search..."></input>
-        </div>
         <div>
             <div>😊</div>
             <div>Get started</div>
@@ -15,10 +12,10 @@ export const DashboardContainer: React.FunctionComponent<{}> = () => (
         </div>
         <div>
             <div>
-                <button>Complete todo</button>
+                <input type="checkbox" readOnly checked={true} />
                 <Link to="/todo/5">
                     <div>
-                        <div>Fix styling after this</div>
+                        <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Fix styling after this</div>
                         <div>🕸</div>
                     </div>
                 </Link>

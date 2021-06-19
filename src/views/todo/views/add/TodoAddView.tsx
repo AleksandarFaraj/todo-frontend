@@ -1,8 +1,8 @@
-import { BackButton } from "../../../containers/util/BackButton"
+import { BackButton } from "../../../../components/util/BackButton"
 import React from "react"
 
-export const AddContainer: React.FunctionComponent<{}> = () => {
-    return (<div>
+export const AddContainer: React.FunctionComponent<{}> = () => (
+    <div>
         <h1>Add todo</h1>
         <BackButton></BackButton>
 
@@ -16,5 +16,5 @@ export const AddContainer: React.FunctionComponent<{}> = () => {
             Due date
         </div>
         <button>Add</button>
-    </div>)
-}
+    </div>
+)
