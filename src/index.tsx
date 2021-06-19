@@ -1,8 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-
-const Application: React.FunctionComponent<{}> = () => (
-    <h1>Hello world</h1>
+import { RouteContainer } from './RouteContainer'
+const ApplicationContainer: React.FunctionComponent<{}> = () => (
+    <RouteContainer></RouteContainer>
 );
-
-render(<Application />, document.getElementById('todo-app'));
+render(<ApplicationContainer />, document.getElementById('todo-app'));
