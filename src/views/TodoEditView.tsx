@@ -24,8 +24,17 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
         /** Updates will most likely happen. Don't block with async, rather update state and validate data later. **/
         mutate("/todo", (todos: Todos) => {
             if (todos) {
-                const excludeOldTodo = todos.filter(todo => todo.id !== todo.id);
-                return [...excludeOldTodo, updatedTodo];
+                const oldTodoIndex = todos.findIndex(todo => todo.id === id);
+
+                /** Might be an edge case where it mutates todos. */
+                if (oldTodoIndex === -1) {
+                    console.error("Warning: TodoEditView cannot find the Todo item supposed to be updated.")
+                    return todos;
+                }
+
+                const newTodoList = [...todos]
+                newTodoList[oldTodoIndex] = updatedTodo
+                return newTodoList
             }
             return [updatedTodo]
         }, false)
