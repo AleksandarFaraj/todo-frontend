@@ -6,7 +6,7 @@ export const CardFormDateTimePicker: React.FunctionComponent<any & { refRegister
     return (
         <div>
             <div className="border-b-2 border-gray-200 border-w-1 flex items-center justify-between">
-                <label htmlFor={props.name}>Due date: </label>
+                <label htmlFor={props.name}>Due date </label>
                 <Controller
                     control={control}
                     {...props}
