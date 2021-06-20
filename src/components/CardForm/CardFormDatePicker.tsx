@@ -5,8 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 export const CardFormDateTimePicker: React.FunctionComponent<any & { refRegister: () => UseFormRegisterReturn, control: any }> = ({ refRegister, control, ...props }) => {
     return (
         <div>
-            <div className="border-b-2 border-gray-200 border-w-1 flex items-center justify-between">
-                <label htmlFor={props.name}>Due date </label>
+            <div className="border-b-2 border-gray-200 border-w-1 flex items-center text-sm">
+                <label className="mr-8" htmlFor={props.name}>Due date </label>
                 <Controller
                     control={control}
                     {...props}
