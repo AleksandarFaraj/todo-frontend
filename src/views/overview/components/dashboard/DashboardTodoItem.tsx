@@ -1,18 +1,12 @@
 
 
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import useSWR, { mutate } from 'swr';
+import { useHistory } from 'react-router-dom';
+import { mutate } from 'swr';
 import { todoPut } from '~/src/api/TodosApi';
-import { fetcher } from '~/src/util/fetcher';
 
 export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ todo }) => {
-    const { data, error } = useSWR<Todos>(
-        `/todo`,
-        fetcher
-    );
     const history = useHistory();
-    if (!data) return <>Data loading</>
     function gotoTodoHandleClick() {
         history.push("/todo/" + todo.id);
     }
@@ -37,7 +31,7 @@ export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ tod
                 /* error notification */
                 /* handle conflict */
             }).finally(() => {
-                // mutate("/todo")
+                mutate("/todo")
             })
     }
     return (
