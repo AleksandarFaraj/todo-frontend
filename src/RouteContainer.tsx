@@ -1,14 +1,12 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route
+    BrowserRouter as Router, Route, Switch
 } from "react-router-dom";
-
-import { TodoAddView } from '~/src/views/TodoAddView';
-import { OverviewView } from '~/src/views/overview/OverviewView';
 import { SearchComponent } from '~/src/views/overview/components/search/SearchComponent';
+import { OverviewView } from '~/src/views/overview/OverviewView';
+import { TodoAddView } from '~/src/views/TodoAddView';
 import { TodoEditView } from './views/TodoEditView';
+
 
 
 export const RouteContainer: React.FunctionComponent<{}> = () => (

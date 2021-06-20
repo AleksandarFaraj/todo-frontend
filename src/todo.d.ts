@@ -7,4 +7,4 @@ type Todo = {
     updated_at: Date,
     due_date: Date
 }
-type Todos = Array<Todo>
+type Todos = Todo[]

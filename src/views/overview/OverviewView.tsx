@@ -1,6 +1,6 @@
 import React from "react";
-import { SearchBar } from "./components/search/component/SearchBar";
 import { DashboardComponent } from "./components/dashboard/DashboardComponent";
+import { SearchBar } from "./components/search/component/SearchBar";
 
 export const OverviewView: React.FunctionComponent<{}> = () => (
     <div>

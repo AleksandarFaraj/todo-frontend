@@ -8,7 +8,7 @@ export const BackButton: React.FunctionComponent<{}> = ({ children }) => {
     const goBack = () => {
         history.goBack()
     }
-    return (<button onClick={goBack}>
+    return (<button type="button" onClick={goBack}>
         {children}
     </button>)
 }
