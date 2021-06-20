@@ -11,11 +11,36 @@ import { BackButton } from "~/src/components/util/BackButton";
 import { fetcher } from "~/src/util/fetcher";
 import { CardFormTypeSelector } from "../components/CardForm/CardFormTypeSelector";
 
-export const TodoEditView: React.FunctionComponent<{ todo?: Todo }> = ({ todo = { title: "Fix styling after this", description: "what" } }) => {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({ defaultValues: { title: todo.title, description: todo.description } });
-    const onSubmit = (data: any) => console.log(data);
 
+
+export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
+    let { id } = useParams<{ id: string }>();
+    /** preload */
+    const { data, error } = useSWR<Todo>("/todos/" + id, fetcher)
+    const { register, handleSubmit, formState: { errors }, control } = useForm({});
+    if (!data) return <></>;
+
+    const onSubmit = ({ title, description, due_date }: Todo) => {
+        const updatedTodo = { ...data, title, description, due_date };
+        /** Updates will most likely happen. Don't block with async, rather update state and validate data later. **/
+        mutate("/todo", (todos: Todos) => {
+            if (todos) {
+                const excludeOldTodo = todos.filter(todo => todo.id !== todo.id);
+                return [...excludeOldTodo, updatedTodo];
+            }
+            return [updatedTodo]
+        }, false)
+        /**send request */
+        todoPut(updatedTodo)
+            .catch((e) => {
+                /** re-try logic **/
+                /** error notification **/
+                /** handle conflict **/
+            }).finally(() => {
+                mutate("/todo")
+            })
+    };
     return (<div className="m-8">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-row my-4 items-end">
