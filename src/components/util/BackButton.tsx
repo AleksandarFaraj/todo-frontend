@@ -2,14 +2,13 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 
-
-export const BackButton: React.FunctionComponent<{}> = () => {
+export const BackButton: React.FunctionComponent<{}> = ({ children }) => {
     const history = useHistory()
 
     const goBack = () => {
         history.goBack()
     }
-    return (<button type="button" onClick={goBack}>
-        X
+    return (<button onClick={goBack}>
+        {children}
     </button>)
 }

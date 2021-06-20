@@ -2,11 +2,14 @@
   "name": "todo-frontend",
   "version": "1.0.0",
   "description": "A todo app for your todo needs!",
-  "main": "index.js",
+  "main": "out/index.html",
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.9.0",
     "react-router-dom": "^5.2.0",
+    "react-textarea-autosize": "^8.3.3",
     "tailwindcss": "^2.2.2"
   },
   "devDependencies": {
@@ -20,8 +23,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build public/index.html",
-    "dev": "parcel public/index.html --open"
+    "build": "parcel build public/index.html ",
+    "dev": "parcel public/index.html"
   },
   "repository": {
     "type": "git",

@@ -4,25 +4,24 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import { TodoContainer } from '~/src/views/todo/views/id/TodoIdView';
-import { DashboardComponent } from '~/src/views/overview/components/dashboard/DashboardComponent';
-import { AddContainer } from '~/src/views/todo/views/add/TodoAddView';
+
+import { TodoAddView } from '~/src/views/TodoAddView';
 import { OverviewView } from '~/src/views/overview/OverviewView';
-import { SearchView } from '~/src/views/overview/components/search/SearchComponent';
+import { SearchComponent } from '~/src/views/overview/components/search/SearchComponent';
+import { TodoEditView } from './views/TodoEditView';
 
 
 export const RouteContainer: React.FunctionComponent<{}> = () => (
     <Router>
         <Switch>
-
             <Route path="/todo/add">
-                <AddContainer></AddContainer>
+                <TodoAddView></TodoAddView>
             </Route>
             <Route path="/todo/search">
-                <SearchView></SearchView>
+                <SearchComponent></SearchComponent>
             </Route>
             <Route path="/todo/:id">
-                <TodoContainer></TodoContainer>
+                <TodoEditView></TodoEditView>
             </Route>
             <Route path="/">
                 <OverviewView></OverviewView>

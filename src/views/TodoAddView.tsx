@@ -1,7 +1,8 @@
-import { BackButton } from "../../../../components/util/BackButton"
-import React from "react"
 
-export const AddContainer: React.FunctionComponent<{}> = () => (
+import React from "react"
+import { BackButton } from "~/src/components/util/BackButton"
+
+export const TodoAddView: React.FunctionComponent<{}> = () => (
     <div>
         <h1>Add todo</h1>
         <BackButton></BackButton>
