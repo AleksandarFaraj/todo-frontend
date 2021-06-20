@@ -14,19 +14,19 @@ import { CardFormTypeSelector } from "../components/CardForm/CardFormTypeSelecto
 
 export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
     let { id } = useParams<{ id: string }>();
-    /** preload */
+    /* preload */
     const { data, error } = useSWR<Todo>("/todos/" + id, fetcher)
     const { register, handleSubmit, formState: { errors }, control } = useForm({});
     if (!data) return <></>;
 
     const onSubmit = ({ title, description, due_date }: Todo) => {
         const updatedTodo = { ...data, title, description, due_date };
-        /** Updates will most likely happen. Don't block with async, rather update state and validate data later. **/
+        /* Updates will most likely happen. Don't block with async, rather update state and validate data later. */
         mutate("/todo", (todos: Todos) => {
             if (todos) {
                 const oldTodoIndex = todos.findIndex(todo => todo.id === id);
 
-                /** Might be an edge case where it mutates todos. */
+                /* Might be an edge case where it mutates todos. */
                 if (oldTodoIndex === -1) {
                     console.error("Warning: TodoEditView cannot find the Todo item supposed to be updated.")
                     return todos;
@@ -38,12 +38,12 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
             }
             return [updatedTodo]
         }, false)
-        /**send request */
+        /*send request */
         todoPut(updatedTodo)
             .catch((e) => {
-                /** re-try logic **/
-                /** error notification **/
-                /** handle conflict **/
+                /* re-try logic */
+                /* error notification */
+                /* handle conflict */
             }).finally(() => {
                 mutate("/todo")
             })
@@ -54,7 +54,7 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
             <div className="flex flex-row my-4 items-end">
                 <BackButton>Cancel</BackButton>
                 <div className="flex-grow text-center">
-                    <h1 className="text-md font-bold">Details</h1>
+                    <h1 className="text-md font-medium">Details</h1>
                 </div>
                 <button type="submit">Done</button>
             </div>
@@ -75,6 +75,8 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
 
 
         </form>
-        <button>Delete</button>
+        <div className="mt-8">
+            <button className="">Delete</button>
+        </div>
     </div>);
 }

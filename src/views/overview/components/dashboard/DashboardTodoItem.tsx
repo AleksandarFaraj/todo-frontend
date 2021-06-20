@@ -18,7 +18,7 @@ export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ tod
     }
     function updateStatusHandleClick(e: React.MouseEvent) {
         const updatedTodo = { ...todo, status: !todo.status };
-        /** This pattern is re-occuring, should be able to a libary for this */
+        /* This pattern is re-occuring, should be able to a libary for this */
         mutate("/todo", (todos: Todos) => {
             if (todos) {
                 const oldTodoIndex = todos.findIndex(_todo => _todo.id === todo.id);
@@ -29,13 +29,13 @@ export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ tod
             return [updatedTodo]
         }, false)
 
-        /**swr */
-        /**send request */
+        /*swr */
+        /*send request */
         todoPut(updatedTodo)
             .catch((e) => {
-                /** re-try logic **/
-                /** error notification **/
-                /** handle conflict **/
+                /* re-try logic */
+                /* error notification */
+                /* handle conflict */
             }).finally(() => {
                 // mutate("/todo")
             })
