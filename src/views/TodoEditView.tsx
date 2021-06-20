@@ -12,8 +12,6 @@ import { fetcher } from "~/src/util/fetcher";
 import { CardFormTypeSelector } from "../components/CardForm/CardFormTypeSelector";
 
 
-
-
 export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
     let { id } = useParams<{ id: string }>();
     /** preload */
@@ -41,6 +39,7 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
                 mutate("/todo")
             })
     };
+
     return (<div className="m-8">
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-row my-4 items-end">
@@ -58,7 +57,11 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
                 <CardFormDateTimePicker control={control} name="due_date" defaultValue={new Date(data.due_date)}></CardFormDateTimePicker>
             </CardFormComponent>
             <div>
-                <CardFormTypeSelector refRegister={() => register("todo_type")} placeholder="Todo" defaultValue={data.title} ></CardFormTypeSelector>
+                <CardFormTypeSelector refRegister={() => register("todo_type")} placeholder="Todo" defaultValue={data.title} >
+                    <option value="default">📩 Default</option>
+                    <option value="web">🕸 Web Development</option>
+                    <option value="music">🏠 Music</option>
+                </CardFormTypeSelector>
             </div>
 
 
