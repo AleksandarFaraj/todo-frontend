@@ -1,1 +1,3 @@
-export const fetcher = (url: string) => fetch("http://localhost:8080" + url).then(res => res.json());
+import { apiUrl } from "./env";
+
+export const fetcher = (resource: string) => fetch(apiUrl(resource)).then(res => res.json());
