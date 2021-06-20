@@ -14,10 +14,9 @@ export const DashboardComponent: React.FunctionComponent<{}> = () => {
     );
     if (!data) { return <></> }
     return (
-        <div>
+        <>
             <DashboardProgressComponent />
             <DashboardTodoList />
-            <Link to="/todo/add"><div>Add todo</div></Link>
-        </div >
+        </>
     )
 };
