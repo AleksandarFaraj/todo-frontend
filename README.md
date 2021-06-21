@@ -17,6 +17,13 @@ Finally to test:
 
     npm run dev
 
+    //windows
+    explorer http://localhost:1234
+
+    //mac
+    open http://localhost:1234
+
+
 To run in production (in a real setting will as static files on a CDN, so only distribute ./out):
     
     npm run build
