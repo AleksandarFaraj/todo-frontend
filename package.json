@@ -24,12 +24,14 @@
     "@types/react-datepicker": "^3.1.8",
     "@types/react-dom": "^17.0.8",
     "@types/react-router-dom": "^5.1.7",
+    "http-server": "^0.12.3",
     "parcel": "^2.0.0-beta.3.1",
     "typescript": "^4.4.0-dev.20210619"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build public/index.html --public-url ./ ",
+    "start": "http-server out",
+    "build": "parcel build public/index.html --public-url ./",
     "dev": "parcel public/index.html"
   },
   "repository": {
