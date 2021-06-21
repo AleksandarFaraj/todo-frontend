@@ -8,12 +8,12 @@ import { todoPut } from '~/src/api/TodosApi';
 export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ todo }) => {
     const history = useHistory();
     function gotoTodoHandleClick() {
-        history.push("/todo/" + todo.id);
+        history.push("/todos/" + todo.id);
     }
     function updateStatusHandleClick(e: React.MouseEvent) {
         const updatedTodo = { ...todo, status: !todo.status };
         /* This pattern is re-occuring, should be able to a libary for this */
-        mutate("/todo", (todos: Todos) => {
+        mutate("/todos", (todos: Todos) => {
             if (todos) {
                 const oldTodoIndex = todos.findIndex(_todo => _todo.id === todo.id);
                 const newTodoList = [...todos]
@@ -31,7 +31,7 @@ export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ tod
                 /* error notification */
                 /* handle conflict */
             }).finally(() => {
-                mutate("/todo")
+                mutate("/todos")
             })
     }
     return (
