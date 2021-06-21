@@ -1,25 +1,20 @@
 
 
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import useSWR, { mutate } from 'swr';
+import { useHistory } from 'react-router-dom';
+import { mutate } from 'swr';
 import { todoPut } from '~/src/api/TodosApi';
-import { fetcher } from '~/src/util/fetcher';
+import { EmojiIconComponent } from '~/src/components/EmojiIconComponent';
 
 export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ todo }) => {
-    const { data, error } = useSWR<Todos>(
-        `/todo`,
-        fetcher
-    );
     const history = useHistory();
-    if (!data) return <>Data loading</>
     function gotoTodoHandleClick() {
-        history.push("/todo/" + todo.id);
+        history.push("/todos/" + todo.id);
     }
     function updateStatusHandleClick(e: React.MouseEvent) {
         const updatedTodo = { ...todo, status: !todo.status };
         /* This pattern is re-occuring, should be able to a libary for this */
-        mutate("/todo", (todos: Todos) => {
+        mutate("/todos", (todos: Todos) => {
             if (todos) {
                 const oldTodoIndex = todos.findIndex(_todo => _todo.id === todo.id);
                 const newTodoList = [...todos]
@@ -37,7 +32,7 @@ export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ tod
                 /* error notification */
                 /* handle conflict */
             }).finally(() => {
-                // mutate("/todo")
+                mutate("/todos")
             })
     }
     return (
@@ -48,7 +43,7 @@ export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ tod
                 </label>
             </div>
             <div className="flex-grow py-3" onClick={gotoTodoHandleClick} >{todo.title}</div>
-            <div className="pr-4 py-3" onClick={gotoTodoHandleClick} ><span className="text-xl">{todo.todo_type}</span></div>
+            <div className="pr-4 py-3" onClick={gotoTodoHandleClick} ><EmojiIconComponent className="text-xl" todo_type={todo.todo_type} /></div>
         </div >
     )
 

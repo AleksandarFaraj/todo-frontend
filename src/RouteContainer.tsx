@@ -12,13 +12,13 @@ import { TodoEditView } from './views/TodoEditView';
 export const RouteContainer: React.FunctionComponent<{}> = () => (
     <Router>
         <Switch>
-            <Route path="/todo/add">
+            <Route path="/todos/add">
                 <TodoAddView></TodoAddView>
             </Route>
-            <Route path="/todo/search">
+            <Route path="/todos/search">
                 <SearchComponent></SearchComponent>
             </Route>
-            <Route path="/todo/:id">
+            <Route path="/todos/:id">
                 <TodoEditView></TodoEditView>
             </Route>
             <Route path="/">
