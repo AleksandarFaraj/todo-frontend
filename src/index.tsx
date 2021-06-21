@@ -12,6 +12,6 @@ const AppContainer: React.FunctionComponent<{}> = () => (
         <TodoServiceProvider>
             <RouteContainer></RouteContainer>
         </TodoServiceProvider>
-    </AppStyleComponent>
+    </AppStyleComponent>    
 );
 render(<AppContainer />, document.getElementById('todo-app'));

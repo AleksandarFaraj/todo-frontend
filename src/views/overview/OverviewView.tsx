@@ -26,12 +26,12 @@ export const OverviewView: React.FunctionComponent<{}> = () => {
                 <div className="bg-white">
                     <SearchBar />
                 </div>
-                <div className="bg-gradient-to-b from-white p-4 to-transparent to-transparent">
+                <div className="bg-gradient-to-b from-white p-4">
                 </div>
             </div>
             <DashboardComponent todos={data} />
             <div className={`bottom-0 fixed w-full ${data && data.length === 0 ? "hidden" : ""}`}>
-                <div className="bg-gradient-to-t from-white p-4 to-transparent to-transparent">
+                <div className="bg-gradient-to-t from-white p-4">
                 </div>
                 <div className="bg-white"><AddTodoButton></AddTodoButton></div>
             </div>
