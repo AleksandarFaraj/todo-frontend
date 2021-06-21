@@ -17,14 +17,14 @@ export const TodoAddView: React.FunctionComponent<{}> = () => {
     const { setInitialTodos } = useTodoService()
     const history = useHistory()
     const { register, handleSubmit, formState: { errors }, control } = useForm({});
-    const { mutate } = useSWR("/todo", fetcher) /* pre-fetch */
-    const onSubmit = async ({ title, description, due_date }: Todo) => {
-        const addTodo = { title, description, due_date, id: "123" } as Todo;
+    const { mutate } = useSWR("/todos", fetcher) /* pre-fetch */
+    const onSubmit = async ({ title, description, due_date, todo_type }: Todo) => {
+        const addTodo = { title, description, due_date, todo_type } as Todo;
         /* mutation of /todo. Disable re-validate locally */
         await mutate((todos: Todos) => {
             if (todos) {
                 const newTodoList: Todos = [...todos]
-                newTodoList.push(addTodo);
+                newTodoList.push({ ...addTodo, id: "-1" });
                 setInitialTodos(newTodoList)
                 history.push("/") /* send initial state */
                 return newTodoList
@@ -37,8 +37,7 @@ export const TodoAddView: React.FunctionComponent<{}> = () => {
                 /* error notification */
                 /* handle conflict */
             }).finally(async () => {
-                /* */
-                //await mutate()
+                await mutate()
                 setInitialTodos()
             })
         return false
@@ -59,11 +58,11 @@ export const TodoAddView: React.FunctionComponent<{}> = () => {
                 <CardFormTextArea refRegister={() => register("description")} placeholder="Notes" />
             </CardFormComponent>
             <CardFormComponent>
-                <CardFormDateTimePicker control={control} name="due_date" defaultValue={null}></CardFormDateTimePicker>
+                <CardFormDateTimePicker control={control} name="due_date"></CardFormDateTimePicker>
             </CardFormComponent>
             <div className="mt-4">
                 <CardFormComponent>
-                    <CardFormTypeSelector refRegister={() => register("todo_type")} placeholder="Todo" >
+                    <CardFormTypeSelector refRegister={() => register("todo_type")} defaultValue="default" placeholder="Todo" >
                         <option value="default">📩 Default</option>
                         <option value="web">🕸 Web Development</option>
                         <option value="music">🏠 Music</option>

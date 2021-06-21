@@ -1,7 +1,7 @@
 import React from "react";
 
 export const SearchBar: React.FunctionComponent<{}> = () => (
-    <div className="px-4">
+    <div className="px-4 ">
         <div className="relative w-full">
             <label>
                 <span className="absolute inset-y-0 left-0 flex items-center pl-2">

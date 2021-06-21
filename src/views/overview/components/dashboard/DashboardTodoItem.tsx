@@ -4,6 +4,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { mutate } from 'swr';
 import { todoPut } from '~/src/api/TodosApi';
+import { EmojiIconComponent } from '~/src/components/EmojiIconComponent';
 
 export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ todo }) => {
     const history = useHistory();
@@ -42,7 +43,7 @@ export const DashboardTodoItem: React.FunctionComponent<{ todo: Todo }> = ({ tod
                 </label>
             </div>
             <div className="flex-grow py-3" onClick={gotoTodoHandleClick} >{todo.title}</div>
-            <div className="pr-4 py-3" onClick={gotoTodoHandleClick} ><span className="text-xl">{todo.todo_type}</span></div>
+            <div className="pr-4 py-3" onClick={gotoTodoHandleClick} ><EmojiIconComponent className="text-xl" todo_type={todo.todo_type} /></div>
         </div >
     )
 

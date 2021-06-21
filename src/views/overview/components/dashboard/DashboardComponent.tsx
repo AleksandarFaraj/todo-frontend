@@ -1,32 +1,21 @@
 
 
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React from 'react';
 import useSWR from 'swr';
 import { useTodoService } from '~/src/TodoServiceContext';
 import { fetcher } from '~/src/util/fetcher';
 import { DashboardProgressComponent } from './DashboardProgressComponent';
 import { DashboardTodoList } from './DashboardTodoList';
 
-export const DashboardComponent: React.FunctionComponent<{}> = () => {
-    const { initialTodos } = useTodoService()
-    const options: { initialData?: Todos } = {}
-    if (initialTodos) {
-        options.initialData = initialTodos
-    }
+export const DashboardComponent: React.FunctionComponent<{ todos: Todos }> = ({ todos }) => {
 
-    const { data, error } = useSWR<Todos>(
-        `/todo`,
-        fetcher,
-        options
-    );
-    if (!data) { return <></> }
 
     return (
         <>
-            <DashboardProgressComponent todos={data} />
-            <DashboardTodoList todos={data} />
+            <div className="p-8"></div>
+            <DashboardProgressComponent todos={todos} />
+            <DashboardTodoList todos={todos} />
+            <div className="p-16"></div>
         </>
     )
 };

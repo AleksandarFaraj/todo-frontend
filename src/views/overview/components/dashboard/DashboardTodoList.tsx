@@ -11,7 +11,6 @@ export const DashboardTodoList: React.FunctionComponent<{ todos: Todos }> = ({ t
                     <DashboardTodoItem key={todo.id} todo={todo} />
                 ))
             }
-
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import useSWR, { mutate } from "swr";
 import { todoDelete, todoPut } from "~/src/api/TodosApi";
 import { CardFormComponent } from "~/src/components/CardForm/CardFormComponent";
@@ -18,14 +19,19 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
     let { id } = useParams<{ id: string }>();
     const history = useHistory();
     /* preload */
-    const { data, error } = useSWR<Todo>("/todos/" + id, fetcher)
+    const { data, error } = useSWR<Todos>("/todos/", fetcher)
+
+
     const { register, handleSubmit, formState: { errors }, control } = useForm({});
     if (!data) return <></>;
 
-    const onSubmit = async ({ title, description, due_date }: Todo) => {
-        const updatedTodo = { ...data, title, description, due_date };
-
-        mutate("/todo", (todos: Todos) => {
+    const todo = data!.find(_todo => _todo.id === id);
+    if (!todo) {
+        return <><Link to={"/"}><div>Todo could not be found</div></Link></>
+    };
+    const onSubmit = async ({ title, description, due_date, todo_type }: Todo) => {
+        const updatedTodo = { ...todo, title, description, due_date, todo_type };
+        mutate("/todos", (todos: Todos) => {
             if (todos) {
                 const newTodoList = [...todos]
                 const oldTodoIndex = todos.findIndex(todo => todo.id === id);
@@ -50,12 +56,12 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
                 /* error notification */
                 /* handle conflict */
             }).finally(() => {
-                mutate("/todo")
+                mutate("/todos")
             })
 
     };
     const onDeleteClick = async () => {
-        mutate("/todo", (todos: Todos) => {
+        mutate("/todos", (todos: Todos) => {
             if (todos) {
                 const filteredTodoList = todos.filter(todo => todo.id !== id);
                 setInitialTodos(filteredTodoList)
@@ -68,13 +74,13 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
         })
         /*send request */
 
-        todoDelete({ id })
+        todoDelete({ id } as Todo)
             .catch((e) => {
                 /* re-try logic */
                 /* error notification */
                 /* handle conflict */
             }).finally(() => {
-                //mutate("/todo")
+                mutate("/todos")
             })
 
     }
@@ -89,15 +95,15 @@ export const TodoEditView: React.FunctionComponent<{}> = ({ }) => {
                 <button type="submit">Done</button>
             </div>
             <CardFormComponent>
-                <CardFormInput refRegister={() => register("title")} placeholder="Todo" defaultValue={data.title} />
-                <CardFormTextArea refRegister={() => register("description")} placeholder="Notes" defaultValue={data.description} />
+                <CardFormInput refRegister={() => register("title")} placeholder="Todo" defaultValue={todo.title} />
+                <CardFormTextArea refRegister={() => register("description")} placeholder="Notes" defaultValue={todo.description} />
             </CardFormComponent>
             <CardFormComponent>
-                <CardFormDateTimePicker control={control} name="due_date" defaultValue={new Date(data.due_date)}></CardFormDateTimePicker>
+                <CardFormDateTimePicker control={control} name="due_date" defaultValue={todo.due_date && new Date(todo.due_date)}></CardFormDateTimePicker>
             </CardFormComponent>
             <div>
                 <CardFormComponent>
-                    <CardFormTypeSelector refRegister={() => register("todo_type")} placeholder="Todo" defaultValue={data.title} >
+                    <CardFormTypeSelector refRegister={() => register("todo_type")} placeholder="Todo" defaultValue={todo.todo_type} >
                         <option value="default">📩 Default</option>
                         <option value="web">🕸 Web Development</option>
                         <option value="music">🏠 Music</option>
