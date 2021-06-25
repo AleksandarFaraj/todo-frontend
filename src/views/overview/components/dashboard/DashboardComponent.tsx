@@ -12,7 +12,7 @@ export const DashboardComponent: React.FunctionComponent<{ todos: Todos }> = ({ 
 
     return (
         <>
-            <div className="p-8"></div>
+            <div className="p-0"></div>
             <DashboardProgressComponent todos={todos} />
             <DashboardTodoList todos={todos} />
             <div className="p-16"></div>

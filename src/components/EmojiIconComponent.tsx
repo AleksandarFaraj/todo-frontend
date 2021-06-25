@@ -11,6 +11,6 @@ const todo_type_map: { [key in TodoType]: { symbol: string, description: string 
     }
 }
 
-export const EmojiIconComponent: React.FunctionComponent<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> & { todo_type?: TodoType }> = ({ todo_type, ...props }) => (
+export const EmojiIconComponent: React.FunctionComponent<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> & { todo_type: TodoType }> = ({ todo_type, ...props }) => (
     todo_type && todo_type_map[todo_type] ? <span {...props}>{todo_type_map[todo_type].symbol}</span> : <span></span>
 )
